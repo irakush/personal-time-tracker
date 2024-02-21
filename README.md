@@ -35,7 +35,7 @@ npm start --prefix client
 
 The entity relationship database is illustrated here:
 
-![erd](./dbdiagram.png)
+![erd](./erd.png)
 
 ### Domain Model
 
@@ -100,6 +100,18 @@ PATCH /task/<int:id>
 DELETE /task/<int:id>
 ```
 
+**Task_Entry**
+```
+GET /task_entry/
+POST /task_entry/
+```
+
+```
+GET /task_entry/<int:id>
+PATCH /task_entry/<int:id>
+DELETE /task_entry/<int:id>
+```
+
 **Task_Category**
 ```
 GET /task_category/
@@ -112,16 +124,16 @@ PATCH /task_category/<int:id>
 DELETE /task_category/<int:id>
 ```
 
-**Task_Entry**
+**Task_Status**
 ```
-GET /task_entry/
-POST /task_entry/
+GET /task_status/
+POST /task_status/
 ```
 
 ```
-GET /task_entry/<int:id>
-PATCH /task_entry/<int:id>
-DELETE /task_entry/<int:id>
+GET /task_status/<int:id>
+PATCH /task_status/<int:id>
+DELETE /task_status/<int:id>
 ```
 
 
