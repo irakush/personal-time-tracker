@@ -142,7 +142,7 @@ DELETE /task_status/<int:id>
 ![screen](./react_home_page.png)
 
 ## Component Hierarchy
-![screen](./components.png)
+![screen](./react_components.png)
 
 ## Component Details
 
