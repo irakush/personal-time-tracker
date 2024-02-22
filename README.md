@@ -139,14 +139,23 @@ DELETE /task_status/<int:id>
 
 ## FRONTEND (REACT)
 
-![screen](./kanban_board2.png)
-
-![screen](./home_page.png)
+![screen](./react_home_page.png)
 
 ## Component Hierarchy
-![screen](./react_comp.png)
+![screen](./components.png)
 
 ## Component Details
 
 ## React Routes
+/tasks: The home page displays a list of all plan/fact tasks of the user.
 
+/users: This page displays a list of all users. You can create, edit and delete users on this page.
+
+/projects: The Projects page displays all projects. You can create, edit and delete projects on this page.
+
+### EXTRA!
+> Stretch goals:
+> - Search :: Add the ability to search by task
+> - Notification :: Sending reminders to the user's cell phone about an upcoming task
+> - Habits :: Add the ability to keep a record of daily activities
+> >
