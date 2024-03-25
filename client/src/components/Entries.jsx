@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 
 const Entries = ({ selectedDate, shouldUpdate }) => {
+  const url = 'http://192.168.12.144:5555'
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
     const fetchEntries = async () => {
       try {
-        const formattedDate = selectedDate.toISOString().split("T")[0];
-        const response = await fetch(`http://127.0.0.1:5555/task_entries_by_date/${formattedDate}`);
+        // const formattedDate = selectedDate.toISOString().split("T")[0];
+        const formattedDate = selectedDate;
+        const response = await fetch(`${url}/task_entries_by_date/${formattedDate}`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }

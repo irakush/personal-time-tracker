@@ -22,9 +22,10 @@ function useInterval(callback, delay) {
 }
 
 const TasksComponent = () => {
+  const url = 'http://192.168.12.144:5555'
   const [tasks, setTasks] = useState([]);
   const [description, setDescription] = useState("");
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date().toLocaleDateString("sv"));
   const [shouldUpdate, setShouldUpdate] = useState(1);
 
   const handleUpdateAdditionalTable = () => {
@@ -33,9 +34,12 @@ const TasksComponent = () => {
   };
 
   const fetchTasks = () => {
-    const formattedDate = selectedDate.toISOString().split("T")[0];
-    console.log(`http://127.0.0.1:5555/tasks_by_date/${formattedDate}`);
-    fetch(`http://127.0.0.1:5555/tasks_by_date/${formattedDate}`, {
+
+    // const formattedDate = selectedDate.toISOString().split("T")[0];
+    const formattedDate = selectedDate;
+    console.log(" fdsdffdfsdfsdfs ::::::: ", selectedDate)
+    console.log(`${url}/tasks_by_date/${selectedDate}`);
+    fetch(`${url}/tasks_by_date/${selectedDate}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -70,9 +74,9 @@ const TasksComponent = () => {
   // const fetchTasksA = async () => {
   //   try {
   //     const formattedDate = selectedDate.toISOString().split("T")[0];
-  //     console.log(`http://127.0.0.1:5555/tasks_by_date/${formattedDate}`);
+  //     console.log(`${url}/tasks_by_date/${formattedDate}`);
   //     const response = await axios.get(
-  //       `http://127.0.0.1:5555/tasks_by_date/${formattedDate}`
+  //       `${url}/tasks_by_date/${formattedDate}`
   //     );
   //     console.log(response.data)
   //     setTasks(response.data);
@@ -127,7 +131,7 @@ const TasksComponent = () => {
       const easternTime = new Date(now.getTime() - (now.getTimezoneOffset() * 60000));
       const startDt = easternTime.toISOString().slice(0, 16);
 
-      fetch("http://127.0.0.1:5555/task_entries", {
+      fetch(`${url}/task_entries`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -198,7 +202,7 @@ const TasksComponent = () => {
     const easternTime = new Date(now.getTime() - (now.getTimezoneOffset() * 60000));
     const nowDt = easternTime.toISOString().slice(0, 16);
  
-    fetch("http://127.0.0.1:5555/task_entries", {
+    fetch(`${url}/task_entries`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -210,7 +214,7 @@ const TasksComponent = () => {
         if (entry.end_dt === null) {
           // console.log("2")
           // console.log('stop ', entry.id)
-          fetch(`http://127.0.0.1:5555/task_entries/${entry.id}`, {
+          fetch(`${url}/task_entries/${entry.id}`, {
             method: "PATCH",
             headers: {
               "Content-Type": "application/json",
@@ -286,8 +290,10 @@ const TasksComponent = () => {
         <input
           type="date"
           id="datePicker"
-          value={selectedDate.toISOString().split("T")[0]}
-          onChange={(e) => setSelectedDate(new Date(e.target.value))}
+          // value={selectedDate.toISOString().split("T")[0]}
+          value={selectedDate}
+          // onChange={(e) => setSelectedDate(new Date(e.target.value))}
+          onChange={(e) => setSelectedDate(e.target.value)}
         />
       </div>
       <div className="mb-3">

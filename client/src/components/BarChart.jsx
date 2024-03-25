@@ -2,7 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 
 const BarChartComponent = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
+  const url = 'http://192.168.12.144:5555'
+
+  // const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
+  const [selectedDate, setSelectedDate] = useState(new Date().toLocaleDateString("sv"));
   const [data, setData] = useState([]);
   const [taskEntriesData, setTaskEntriesData] = useState([]);
   const chartRef = useRef(null);
@@ -12,7 +15,7 @@ const BarChartComponent = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:5555/tasks_by_date/${selectedDate}`);
+        const response = await fetch(`${url}/tasks_by_date/${selectedDate}`);
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
@@ -29,7 +32,7 @@ const BarChartComponent = () => {
   useEffect(() => {
     const fetchTaskEntriesData = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:5555/task_entries_by_date/${selectedDate}`);
+        const response = await fetch(`${url}/task_entries_by_date/${selectedDate}`);
         if (!response.ok) {
           throw new Error('Failed to fetch task entries data');
         }

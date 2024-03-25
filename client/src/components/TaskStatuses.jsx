@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const TaskStatuses = () => {
+  const url = 'http://192.168.12.144:5555'
   const [taskStatuses, setTaskStatuses] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [statusesPerPage] = useState(5);
@@ -16,7 +17,7 @@ const TaskStatuses = () => {
 
   const fetchTaskStatuses = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5555/task_statuses');
+      const response = await fetch(`${url}/task_statuses`);
       const data = await response.json();
       data.sort((a, b) => a.name.localeCompare(b.name)); // Sort statuses by name
       setTaskStatuses(data);
@@ -45,7 +46,7 @@ const TaskStatuses = () => {
 
   const handleNewStatusSubmit = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5555/task_statuses', {
+      const response = await fetch(`${url}/task_statuses`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -68,7 +69,7 @@ const TaskStatuses = () => {
 
   const handleEditStatusSubmit = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:5555/task_statuses/${selectedStatus.id}`, {
+      const response = await fetch(`${url}/task_statuses/${selectedStatus.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -91,7 +92,7 @@ const TaskStatuses = () => {
 
   const handleDeleteStatusSubmit = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:5555/task_statuses/${selectedStatus.id}`, {
+      const response = await fetch(`${url}/task_statuses/${selectedStatus.id}`, {
         method: 'DELETE',
       });
       if (response.ok) {

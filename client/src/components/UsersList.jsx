@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
 function UsersList() {
-  const url = 'http://127.0.0.1:5555'
+  const url = 'http://192.168.12.144:5555'
   const userObj = {
     "name": "",
     "password":"",

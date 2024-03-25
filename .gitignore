@@ -1,5 +1,7 @@
 server/key.py
 Pipfile.lock
+instance/
+migrations/
 
 client/node_modules
 client/package-lock.json

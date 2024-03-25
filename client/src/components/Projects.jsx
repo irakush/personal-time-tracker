@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const Projects = () => {
+  const url = 'http://192.168.12.144:5555'
   const [projects, setProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [projectsPerPage] = useState(5);
@@ -16,7 +17,7 @@ const Projects = () => {
 
   const fetchProjects = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5555/projects');
+      const response = await fetch(`${url}/projects`);
       const data = await response.json();
       data.sort((a, b) => a.name.localeCompare(b.name)); // Сортировка проектов по имени
       setProjects(data);
@@ -45,7 +46,7 @@ const Projects = () => {
 
   const handleNewProjectSubmit = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5555/projects', {
+      const response = await fetch(`${url}/projects`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -68,7 +69,7 @@ const Projects = () => {
 
   const handleEditProjectSubmit = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:5555/projects/${selectedProject.id}`, {
+      const response = await fetch(`${url}/projects/${selectedProject.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -91,7 +92,7 @@ const Projects = () => {
 
   const handleDeleteProjectSubmit = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:5555/projects/${selectedProject.id}`, {
+      const response = await fetch(`${url}/projects/${selectedProject.id}`, {
         method: 'DELETE',
       });
       if (response.ok) {

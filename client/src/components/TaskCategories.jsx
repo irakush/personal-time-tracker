@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 const TaskCategories = () => {
+  const url = 'http://192.168.12.144:5555'
+
   const [categories, setCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [categoriesPerPage] = useState(5);
@@ -16,7 +18,7 @@ const TaskCategories = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5555/task_categories');
+      const response = await fetch(`${url}/task_categories`);
       const data = await response.json();
       data.sort((a, b) => a.name.localeCompare(b.name)); // Sort categories by name
       setCategories(data);
@@ -45,7 +47,7 @@ const TaskCategories = () => {
 
   const handleNewCategorySubmit = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5555/task_categories', {
+      const response = await fetch(`${url}/task_categories`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -68,7 +70,7 @@ const TaskCategories = () => {
 
   const handleEditCategorySubmit = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:5555/task_categories/${selectedCategory.id}`, {
+      const response = await fetch(`${url}/task_categories/${selectedCategory.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -91,7 +93,7 @@ const TaskCategories = () => {
 
   const handleDeleteCategorySubmit = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:5555/task_categories/${selectedCategory.id}`, {
+      const response = await fetch(`${url}/task_categories/${selectedCategory.id}`, {
         method: 'DELETE',
       });
       if (response.ok) {

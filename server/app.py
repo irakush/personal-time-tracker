@@ -485,4 +485,4 @@ def task_categories_by_id(id):
 
 
 if __name__ == "__main__":  # if the __name__(current module) is main
-    app.run(port=5555, debug=True)  # then run the port at 5555
+    app.run(debug=True, port=5555, host="0.0.0.0")  # then run the port at 5555

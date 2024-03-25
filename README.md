@@ -12,7 +12,7 @@ As a user, I want to be able to create, read, update and delete tasks of my plan
 
 
 
-## Installation Instructions
+## Installation Instructions 
 To download the dependencies for the frontend and backend, run:
 ```
 pipenv install

@@ -14,6 +14,8 @@ moment.locale("es-es", {
 const localizer = momentLocalizer(moment);
 
 const TasksComponent = () => {
+
+  const url = 'http://192.168.12.144:5555'
   // Состояния для хранения данных
   const [tasks, setTasks] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -32,10 +34,10 @@ const TasksComponent = () => {
   // Загрузка начальных данных
   const fetchInitialData = async () => {
     fetchTasks();
-    fetchData('http://127.0.0.1:5555/task_statuses', setStatuses);
-    fetchData('http://127.0.0.1:5555/users', setUsers);
-    fetchData('http://127.0.0.1:5555/projects', setProjects);
-    fetchData('http://127.0.0.1:5555/task_categories', setCategories);
+    fetchData(url + '/task_statuses', setStatuses);
+    fetchData(url + '/users', setUsers);
+    fetchData(url + '/projects', setProjects);
+    fetchData(url + '/task_categories', setCategories);
   };
 
   // Универсальная функция для загрузки данных
@@ -48,7 +50,7 @@ const TasksComponent = () => {
   // Загрузка задач
   const fetchTasks = async () => {
     // /user/2
-    fetchData('http://127.0.0.1:5555/tasks', data => {
+    fetchData(url + '/tasks', data => {
       const formattedTasks = data.map(task => ({
         ...task,
         start: new Date(task.start_dt),
@@ -90,10 +92,10 @@ const TasksComponent = () => {
 
     console.log(task)
 
-    const url = isEditMode ? `http://127.0.0.1:5555/tasks/${currentTask.id}` : 'http://127.0.0.1:5555/tasks';
+    const url_fetch = isEditMode ? `${url}/tasks/${currentTask.id}` : url + '/tasks';
     const method = isEditMode ? 'PATCH' : 'POST';
 
-    await fetch(url, {
+    await fetch(url_fetch, {
       method: method,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(task),
@@ -106,7 +108,7 @@ const TasksComponent = () => {
   // Удаление задачи
   const handleDelete = async () => {
     if (window.confirm('Are you sure you want to delete this task?')) {
-      await fetch(`http://127.0.0.1:5555/tasks/${currentTask.id}`, {
+      await fetch(`${url}/tasks/${currentTask.id}`, {
         method: 'DELETE',
       });
       setShowModal(false);
